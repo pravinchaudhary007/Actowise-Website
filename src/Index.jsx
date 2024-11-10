@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { NavLink, Outlet } from "react-router-dom"
 
-
 const Index = () => {
 
     const MainIndex = () => {

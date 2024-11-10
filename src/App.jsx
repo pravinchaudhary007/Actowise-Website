@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Index from "./Index";
+import Index from "./index";
 import UserIndex from "./Components/Client/UserIndex";
 import UserHome from "./Components/Client/Home/UserHome";
 import Deshboard from "./Components/Admin/Home/Deshboard";
