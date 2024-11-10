@@ -83,7 +83,7 @@ const MainSlider = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          className="relative duration-300 bg-no-repeat h-screen"
+          className="relative duration-300 bg-no-repeat lg:h-screen md:h-[80vh] sm:h-[60vh] h-[50vh]"
         >
           {/* Background overlay */}
           <div
@@ -135,7 +135,7 @@ const MainSlider = () => {
 
         {/* Main content section */}
         <section className="absolute  lg:inset-54 md:inset-48 sm:inset-36 inset-20 
-                                      lG:top-1/4   md:top-[40%] sm:top-[40%] top-[41%] 
+                                      lG:top-1/4   md:top-[28%] sm:top-[18%] top-[12%] 
                                       lg:left-56   md:left-36 sm:left-32 left-16 
         w-fit  text-white">
           <div className="mb-8">
