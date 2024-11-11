@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Header from "../Head/Header";
 import { EventContext } from "../../Context/EventContext";
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
@@ -72,7 +72,16 @@ const MainSlider = () => {
     },
   ];
 
-  const currentCategory = categories[currentCategoryIndex]; // Current category data
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
+    }, 3000);
+  
+    return () => clearInterval(intervalId);
+  }, [categories.length]);
+
+
+  const currentCategory = categories[currentCategoryIndex]; 
   return (
     <>
       <main className="w-full">
