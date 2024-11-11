@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Header from "../Head/Header";
 import { EventContext } from "../../Context/EventContext";
 import { PiCaretLeftBold, PiCaretRightBold } from "react-icons/pi";
@@ -13,6 +13,8 @@ import web from "../../../../assets/web.jpg";
 const MainSlider = () => {
   const { isSticky } = useContext(EventContext);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalIdRef = useRef(null);
 
   const handleNextCategory = () => {
     setCurrentCategoryIndex((prevIndex) =>
@@ -34,7 +36,7 @@ const MainSlider = () => {
       id: 1,
       img: main,
       title: "Technology",
-      heading: "Discover the Latest Break throughs in Technology",
+      heading: "The Latest Technology",
       description:
         "Technology is transforming the world at an unprecedented pace. From artificial intelligence and blockchain to virtual reality and 5G.",
     },
@@ -73,12 +75,22 @@ const MainSlider = () => {
   ];
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
+    if (isPaused) return; 
+    else
+    intervalIdRef.current = setInterval(() => {
       setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
     }, 3000);
-  
-    return () => clearInterval(intervalId);
-  }, [categories.length]);
+    return () => clearInterval(intervalIdRef.current);
+  }, [isPaused, categories.length]);  
+
+  const holdCurrentCategory = () => {
+    setIsPaused(true);
+    clearInterval(intervalIdRef.current); 
+  };
+
+  const resumeSlider = () => {
+    setIsPaused(false);
+  };
 
 
   const currentCategory = categories[currentCategoryIndex]; 
@@ -86,13 +98,16 @@ const MainSlider = () => {
     <>
       <main className="w-full">
         {/* Section with dynamic background image */}
-        <section
+        <section   
+        onMouseDown={holdCurrentCategory} 
+        onMouseUp={resumeSlider} 
+        onMouseLeave={resumeSlider} 
           style={{
             backgroundImage: `url(${currentCategory.img})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
-          className="relative duration-300 bg-no-repeat lg:h-screen md:h-[80vh] sm:h-[60vh] h-[50vh]"
+          className="relative duration-300 bg-no-repeat lg:h-screen md:h-[80vh] sm:h-[60vh] h-[60vh]"
         >
           {/* Background overlay */}
           <div
@@ -116,7 +131,7 @@ const MainSlider = () => {
           </button>
 
           {/* Category indicators */}
-          <div className="bottom-12  left-1/2 absolute transform -translate-x-1/2">
+          <div className="bottom-12 sm:mt-0 mt-4  left-1/2 absolute transform -translate-x-1/2">
             <div className="flex justify-center gap-3 items-center">
               {categories.map((_, index) => (
                 <span
@@ -143,8 +158,12 @@ const MainSlider = () => {
         </nav>
 
         {/* Main content section */}
-        <section className="absolute  lg:inset-54 md:inset-48 sm:inset-36 inset-20 
-                                      lG:top-1/4   md:top-[28%] sm:top-[18%] top-[12%] 
+        <section 
+         onMouseDown={holdCurrentCategory} 
+        onMouseUp={resumeSlider} 
+        onMouseLeave={resumeSlider} 
+        className="absolute  lg:inset-54 md:inset-48 sm:inset-36 inset-20 
+                                      lG:top-1/4   md:top-[28%] sm:top-[18%] top-[16%] 
                                       lg:left-56   md:left-36 sm:left-32 left-16 
         w-fit  text-white">
           <div className="mb-8">
