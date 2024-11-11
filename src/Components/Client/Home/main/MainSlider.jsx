@@ -163,7 +163,7 @@ const MainSlider = () => {
         onMouseUp={resumeSlider} 
         onMouseLeave={resumeSlider} 
         className="absolute  lg:inset-54 md:inset-48 sm:inset-36 inset-20 
-                                      lG:top-1/4   md:top-[28%] sm:top-[18%] top-[16%] 
+                                      lG:top-1/4   md:top-[28%] sm:top-[18%] top-[18%] 
                                       lg:left-56   md:left-36 sm:left-32 left-16 
         w-fit  text-white">
           <div className="mb-8">
